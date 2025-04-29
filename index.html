@@ -30,6 +30,10 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .fade-in { animation: fadeIn 1s ease-in; }
     .error-message { color: red; text-align: center; padding: 20px; font-size: 18px; }
+    /* Ensure hover effect for contact icons */
+    .contact-icon:hover span, .contact-icon:hover i {
+      color: #60a5fa !important; /* Tailwind's text-blue-400 */
+    }
   </style>
 </head>
 <body>
@@ -354,43 +358,51 @@
     };
 
     // Contact Component
-    const Contact = () => (
-      <section id="contact" className="py-20 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
-          <h2 className="text-3xl font-bold text-center mb-12">Contact Me</h2>
-          <div className="text-center">
-            <p className="text-lg mb-6">
-              I'm excited to connect! Reach out via email or connect with me on LinkedIn.
-            </p>
-            <div className="flex justify-center space-x-6">
-              <a
-                href="gmarkat@buffalo.edu"
-                className="text-2xl hover:text-blue-400"
-              >
-                <i className="fas fa-envelope"></i>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/gnaneswar-markat-12769b1a8/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl hover:text-blue-400"
-              >
-                <i className="fab fa-linkedin"></i>
-              </a>
-              <a
-                href="https://github.com/Gnaneswar99" // Update with your GitHub profile if applicable
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-2xl hover:text-blue-400"
-              >
-                <i className="fab fa-github"></i>
-              </a>
+    const Contact = () => {
+      const handleEmailClick = () => {
+        console.log('Email icon clicked: Opening mailto:gmarkat@buffalo.edu');
+      };
+
+      return (
+        <section id="contact" className="py-20 bg-gray-900 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+            <h2 className="text-3xl font-bold text-center mb-12">Contact Me</h2>
+            <div className="text-center">
+              <p className="text-lg mb-6">
+                I'm excited to connect! Reach out via email or connect with me on LinkedIn.
+              </p>
+              <div className="flex justify-center space-x-6">
+                <a
+                  href="mailto:gmarkat@buffalo.edu"
+                  className="text-2xl hover:text-blue-400 contact-icon"
+                  target="_blank"
+                  onClick={handleEmailClick}
+                >
+                  <span className="fas fa-envelope"></span>
+                </a>
+                <a
+                  href="https://linkedin.com/in/gnaneswarm"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl hover:text-blue-400 contact-icon"
+                >
+                  <i className="fab fa-linkedin"></i>
+                </a>
+                <a
+                  href="https://github.com/your-github-username" // Update with your GitHub profile if applicable
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-2xl hover:text-blue-400 contact-icon"
+                >
+                  <i className="fab fa-github"></i>
+                </a>
+              </div>
+              <p className="mt-6">Phone: <a href="tel:+17162597453" className="hover:text-blue-400">716-259-7453</a></p>
             </div>
-            <p className="mt-6">Phone: <a href="tel:+17162597453" className="hover:text-blue-400">716-259-7453</a></p>
           </div>
-        </div>
-      </section>
-    );
+        </section>
+      );
+    };
 
     // Main App Component
     const App = () => {
