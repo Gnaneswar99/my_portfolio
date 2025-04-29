@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfolio of Gnaneswar Markat, a Data Analyst with expertise in SQL, Python, and machine learning.">
+  <meta name="keywords" content="Data Analyst, Data Science, SQL, Python, Machine Learning, Portfolio">
+  <meta name="author" content="Gnaneswar Markat">
+  <title>Gnaneswar Markat - Data Analyst Portfolio</title>
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAAGFBMVEUAAAD///8AAAD///8AAAD///8AAAD///8AAABJ9BzvAAAACHRSTlMAAQIDBAUGBwgJ1gAAACZJREFUeNrtz0EKgCAQBFFQ73/H/6+ZuEgs5hC4OQeIwc3a7n6vvwH3WA0h2gAAAABJRU5ErkJggg==">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous">
+  <!-- Primary CDNs -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js" integrity="sha512-8Q6Y9XnTbOE+JNvjBQwJ2H8S+wzzgLnwphb5S6bx9v+9rjq9+Fg==></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js" integrity="sha512-MwP+Gn4w==></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.22.5/babel.min.js" integrity="sha512-LS+8g==></script>
+  <!-- Fallback CDNs -->
+  <script>
+    if (!window.React) {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>');
+    }
+    if (!window.ReactDOM) {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>');
+    }
+    if (!window.Babel) {
+      document.write('<script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.5/babel.min.js"></script>');
+    }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .fade-in { animation: fadeIn 1s ease-in; }
+    .error-message { color: red; text-align: center; padding: 20px; font-size: 18px; }
+  </style>
+</head>
+<body>
+  <div id="root">
+    <div className="error-message">
+      Loading portfolio... If this persists, JavaScript may have failed. Please check the console (F12) for errors.
+    </div>
+  </div>
+  <script>
+    console.log('Checking CDN dependencies...');
+    const missing = [];
+    if (!window.React) missing.push('React');
+    if (!window.ReactDOM) missing.push('ReactDOM');
+    if (!window.Babel) missing.push('Babel');
+    if (missing.length > 0) {
+      console.error('CDN load failure: Missing scripts - ' + missing.join(', '));
+      document.getElementById('root').innerHTML = '<div class="error-message">Error: Failed to load required scripts (' + missing.join(', ') + '). Please check your network and try again.</div>';
+    } else {
+      console.log('All CDNs loaded successfully');
+    }
+  </script>
+  <script type="text/babel" data-presets="react">
+    console.log('Babel script executing...');
+
+    const { useState, Component } = React;
+
+    // Proper Error Boundary Component
+    class ErrorBoundary extends Component {
+      state = { error: null, errorInfo: null };
+
+      componentDidCatch(error, errorInfo) {
+        console.error('ErrorBoundary caught:', error, errorInfo);
+        this.setState({ error: error.message, errorInfo });
+      }
+
+      render() {
+        if (this.state.error) {
+          return (
+            <div className="error-message">
+              Error loading portfolio: {this.state.error}. Please check the console for details.
+            </div>
+          );
+        }
+        return this.props.children;
+      }
+    }
+
+    // Navbar Component
+    const Navbar = () => {
+      const [isOpen, setIsOpen] = useState(false);
+      const navItems = ['Home', 'About', 'Experience', 'Projects', 'Certifications', 'Contact'];
+
+      return (
+        <nav className="bg-gray-900 text-white fixed w-full z-10 top-0 shadow-lg">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between h-16">
+              <div className="flex items-center">
+                <span className="font-bold text-xl">GM</span>
+              </div>
+              <div className="hidden md:flex items-center space-x-4">
+                {navItems.map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    {item}
+                  </a>
+                ))}
+                <a
+                  href="Gnaneswar_Resume_OG.pdf" // Ensure this file is in the same directory or update with a valid URL
+                  download
+                  className="bg-blue-600 text-white px-4 py-2 rounded-full font-semibold hover:bg-blue-700"
+                >
+                  Resume
+                </a>
+              </div>
+              <div className="md:hidden flex items-center">
+                <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none">
+                  <i className={`fas ${isOpen ? 'fa-times' : 'fa-bars'} text-2xl`}></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          {isOpen && (
+            <div className="md:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                {navItems.map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="block hover:bg-gray-700 px-3 py-2 rounded-md text-base font-medium"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item}
+                  </a>
+                ))}
+                <a
+                  href="Gnaneswar_Resume_OG.pdf"
+                  download
+                  className="block bg-blue-600 text-white px-3 py-2 rounded-md text-base font-medium"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Download Resume
+                </a>
+              </div>
+            </div>
+          )}
+        </nav>
+      );
+    };
+
+    // Hero Component
+    const Hero = () => (
+      <section id="home" className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white h-screen flex items-center justify-center fade-in">
+        <div className="text-center">
+          <h1 className="text-5xl font-bold mb-4">Gnaneswar Markat</h1>
+          <p className="text-2xl mb-6">Data Analyst | Machine Learning Enthusiast</p>
+          <p className="text-lg max-w-2xl mx-auto">
+            Leveraging 3+ years of experience in data analysis, visualization, and machine learning to drive business insights and operational efficiency.
+          </p>
+          <a
+            href="#contact"
+            className="mt-6 inline-block bg-white text-blue-600 px-6 py-3 rounded-full font-semibold hover:bg-gray-200"
+          >
+            Get in Touch
+          </a>
+        </div>
+      </section>
+    );
+
+    // About Component
+    const About = () => {
+      const skills = {
+        'Programming & Scripting': ['Python', 'SQL', 'R', 'SAS', 'MATLAB'],
+        'Data Analysis & Visualization': ['Data Visualization', 'Data Manipulation', 'EDA', 'Statistical Modeling', 'Predictive Modeling', 'MS Excel', 'Power BI', 'Tableau', 'Looker', 'StreamLit'],
+        'Data Management & ETL': ['Snowflake', 'Hive', 'Kafka', 'Apache Airflow', 'MySQL', 'MongoDB', 'Azure'],
+        'Machine Learning & AI': ['Data Mining', 'Machine Learning', 'Statistical Modeling', 'Predictive Modeling', 'GENAI', 'LangChain', 'LLMs'],
+        'Cloud Technologies': ['Google Cloud Platform', 'BigQuery', 'AWS', 'Azure']
+      };
+
+      return (
+        <section id="about" className="py-20 bg-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+            <h2 className="text-3xl font-bold text-center mb-12">About Me</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Who I Am</h3>
+                <p className="text-gray-600 mb-4">
+                  I am a Data Analyst with a Master’s in Data Science from the University at Buffalo (GPA: 3.76/4.0, Aug 2023 - Jan 2025). With over 3 years of experience at Cognizant, I specialize in SQL, Python, and cloud platforms like Snowflake and Azure. My expertise lies in automating data workflows, optimizing ETL pipelines, and creating interactive dashboards to deliver actionable business insights.
+                </p>
+                <p className="text-gray-600 mb-4">
+                  <strong>Coursework:</strong> Python Programming, Database Fundamentals, Statistical Learning, Machine Learning, SQL, Data Structures and Algorithms.
+                </p>
+                <a
+                  href="Gnaneswar_Resume_OG.pdf" // Ensure this file is in the same directory or update with a valid URL
+                  download
+                  className="mt-4 inline-block bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700"
+                >
+                  Download Resume
+                </a>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Technical Skills</h3>
+                <div className="space-y-4">
+                  {Object.entries(skills).map(([category, skillList]) => (
+                    <div key={category}>
+                      <h4 className="text-lg font-medium text-blue-600">{category}</h4>
+                      <div className="grid grid-cols-2 gap-2 mt-2">
+                        {skillList.map((skill) => (
+                          <div key={skill} className="flex items-center">
+                            <i className="fas fa-check-circle text-blue-600 mr-2"></i>
+                            <span>{skill}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Experience Component
+    const Experience = () => {
+      const experiences = [
+        {
+          title: 'Data Analyst',
+          company: 'Cognizant Technology Solutions, Bangalore, India',
+          period: 'August 2021 - July 2023',
+          details: [
+            'Optimized SQL scripts to enhance data processing efficiency by applying advanced techniques like indexing, query optimization, and Common Table Expressions, reducing processing time by 50% and significantly improving reporting workflows.',
+            'Developed automated data extraction workflows by developing Python scripts integrated with SQL, utilizing libraries like SQLAlchemy and Pandas, and scheduling tasks with Airflow, reducing manual efforts by 40% and significantly boosting productivity.',
+            'Implemented robust ETL pipelines for centralized data processing by leveraging Apache Spark and Python (Pandas) to extract, transform, and load data into an Oracle Data Warehouse, deploying automated validation frameworks, and reducing data errors by 35%.',
+            'Led the migration of large datasets from Cloudera and SQL Server to Snowflake using batch processing and real-time data streaming techniques, achieving a 50% improvement in query performance and scalability for stakeholder data.',
+            'Engineered data-driven insights and enhanced operational reporting by improving dashboard automation and implementing robust data quality checks using Python and SQL, resulting in actionable strategies that drove an increase in revenue.'
+          ]
+        },
+        {
+          title: 'Junior Data Analyst',
+          company: 'Cognizant Technology Solutions, Bangalore, India',
+          period: 'August 2020 - July 2021',
+          details: [
+            'Performed exploratory data analysis (EDA) using seaborn and plotly to visualize multivariate relationships and identify outliers, leading to a 15% improvement in anomaly detection accuracy.',
+            'Created interactive Power BI dashboards leveraging DAX formulas, custom measures, and SQL-based data transformations to create interactive KPIs and enable detailed exploration of data through advanced filtering and insights for internal reporting.'
+          ]
+        }
+      ];
+
+      return (
+        <section id="experience" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+            <h2 className="text-3xl font-bold text-center mb-12">Experience</h2>
+            <div className="space-y-12">
+              {experiences.map((exp, index) => (
+                <div key={index} className="border-l-4 border-blue-600 pl-6">
+                  <h3 className="text-xl font-semibold">{exp.title}</h3>
+                  <p className="text-gray-600">{exp.company} | {exp.period}</p>
+                  <ul className="mt-4 list-disc list-inside text-gray-600">
+                    {exp.details.map((detail, i) => (
+                      <li key={i}>{detail}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Projects Component
+    const Projects = () => {
+      const projects = [
+        {
+          title: 'Diabetes Patient Health Analytics System',
+          tech: 'Tableau, Python, SQL, Power BI, MS Excel',
+          description: 'Analyzed a diabetes dataset to identify trends in health metrics like blood glucose, age, BMI, and lifestyle. Cleaned and preprocessed data using Python and Pandas, while SQL was used for database management. Visualized patient health trends with Tableau and Power BI, enabling healthcare providers to identify risk factors and recommend personalized treatment plans.',
+          impact: 'Supported preventive healthcare and improved early diagnosis.'
+        },
+        {
+          title: 'Hotel Booking Management System',
+          tech: 'SQL, PostgreSQL',
+          description: 'Designed a total booking database to manage guest details, payments, and special requests. Enhanced booking trends analysis by creating tables and relationships in PostgreSQL, improving query performance through indexing and query refinement. Utilized ER diagram tools for database structure.',
+          impact: 'Improved booking trends analysis and management efficiency.'
+        },
+        {
+          title: 'Credit Score Classification System',
+          tech: 'Python, Pandas, Machine Learning',
+          description: 'Constructed a banking classification system to categorize credit scores as "Poor," "Standard," or "Good" using Random Forest (80.31% accuracy). Conducted feature importance analysis on a Kaggle dataset to identify key factors like Outstanding Debt and Credit Mix, enhancing loan approval decisions.',
+          impact: 'Minimized default risks and refined creditworthiness assessment.'
+        }
+      ];
+
+      return (
+        <section id="projects" className="py-20 bg-gray-100">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+            <h2 className="text-3xl font-bold text-center mb-12">Projects</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {projects.map((project, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition-shadow"
+                >
+                  <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
+                  <p className="text-gray-600 mb-2"><strong>Tech:</strong> {project.tech}</p>
+                  <p className="text-gray-600 mb-4">{project.description}</p>
+                  <p className="text-blue-600 font-semibold">{project.impact}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Certifications Component
+    const Certifications = () => {
+      const certs = [
+        {
+          title: 'AZ-900 Azure Fundamentals',
+          issuer: 'Microsoft'
+        },
+        {
+          title: 'Data Analysis with Python',
+          issuer: 'Coursera'
+        },
+        {
+          title: 'Google Data Analytics',
+          issuer: 'Google'
+        },
+        {
+          title: 'Internship Achievement',
+          issuer: 'Cognizant',
+          description: 'Gained practical expertise in data analysis, SQL querying, and visualization using Tableau and Power BI, enhancing data-driven decision-making and process optimization.'
+        }
+      ];
+
+      return (
+        <section id="certifications" className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+            <h2 className="text-3xl font-bold text-center mb-12">Certifications & Achievements</h2>
+            <div className="grid md:grid-cols-2 gap-8">
+              {certs.map((cert, index) => (
+                <div
+                  key={index}
+                  className="bg-blue-50 p-6 rounded-lg shadow-md text-center"
+                >
+                  <i className="fas fa-certificate text-blue-600 text-3xl mb-4"></i>
+                  <p className="text-lg font-semibold">{cert.title}</p>
+                  <p className="text-gray-600">{cert.issuer}</p>
+                  {cert.description && <p className="text-gray-600 mt-2">{cert.description}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    };
+
+    // Contact Component
+    const Contact = () => (
+      <section id="contact" className="py-20 bg-gray-900 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 fade-in">
+          <h2 className="text-3xl font-bold text-center mb-12">Contact Me</h2>
+          <div className="text-center">
+            <p className="text-lg mb-6">
+              I'm excited to connect! Reach out via email or connect with me on LinkedIn.
+            </p>
+            <div className="flex justify-center space-x-6">
+              <a
+                href="mailto:gmarkat@buffalo.edu"
+                className="text-2xl hover:text-blue-400"
+              >
+                <i className="fas fa-envelope"></i>
+              </a>
+              <a
+                href="https://linkedin.com/in/gnaneswarm"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-2xl hover:text-blue-400"
+              >
+                <i className="fab fa-linkedin"></i>
+              </a>
+              <a
+                href="https://github.com/your-github-username" // Update with your GitHub profile if applicable
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-2xl hover:text-blue-400"
+              >
+                <i className="fab fa-github"></i>
+              </a>
+            </div>
+            <p className="mt-6">Phone: <a href="tel:+17162597453" className="hover:text-blue-400">716-259-7453</a></p>
+          </div>
+        </div>
+      </section>
+    );
+
+    // Main App Component
+    const App = () => {
+      console.log('Rendering App component...');
+      return (
+        <ErrorBoundary>
+          <div>
+            <Navbar />
+            <Hero />
+            <About />
+            <Experience />
+            <Projects />
+            <Certifications />
+            <Contact />
+          </div>
+        </ErrorBoundary>
+      );
+    };
+
+    // Render the App
+    console.log('Attempting to render ReactDOM...');
+    try {
+      ReactDOM.render(<App />, document.getElementById('root'));
+      console.log('ReactDOM rendered successfully');
+    } catch (error) {
+      console.error('Error rendering ReactDOM:', error);
+      document.getElementById('root').innerHTML = `<div class="error-message">Error loading portfolio: ${error.message}. Please check the console for details.</div>`;
+    }
+  </script>
+</body>
+</html>
